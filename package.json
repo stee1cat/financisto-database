@@ -4,6 +4,7 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
+    "start": "tsc --watch --project ./tsconfig.json",
     "build": "tsc --project ./tsconfig.json",
     "test": "mocha -r ts-node/register test/**/*.test.ts"
   },
@@ -19,5 +20,8 @@
     "ts-node": "^6.0.0",
     "tslint": "^5.9.1",
     "typescript": "^2.8.1"
+  },
+  "dependencies": {
+    "pako": "^1.0.6"
   }
 }
