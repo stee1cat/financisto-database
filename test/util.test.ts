@@ -1,10 +1,10 @@
 import { expect } from 'chai';
 import 'mocha';
 
-import { readFile, extract } from '../../src/lib/util';
+import { readFile, extract } from '../src/util';
 
 describe('util', function () {
-    let filename = `${__dirname}/../data/20180422_154154_511.backup`;
+    let filename = `${__dirname}/data/20180422_154154_511.backup`;
 
     it('readFile', async function () {
         let file = await readFile(filename);
