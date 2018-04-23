@@ -1,6 +1,6 @@
-import { Location } from '../../models/Location';
 import { Money } from '../../models/Money';
 import { Entity } from './Entity';
+import { Factory } from './Factory';
 
 export enum EntityTypes {
     Account = 'account',
@@ -42,21 +42,12 @@ export class FinancistoProvider {
                         if (match = line.match(entityBegin)) {
                             entity = new Entity(match[1]);
                         } else if (entity && line === Tags.EntityEnd) {
-                            if (entity.name === EntityTypes.Location) {
-                                let location = new Location();
+                            switch (entity.name) {
+                                case EntityTypes.Location:
+                                    let location = Factory.createLocation(entity);
 
-                                location.id = +entity.get('_id');
-                                location.name = entity.get('name');
-                                location.title = entity.get('title');
-                                location.datetime = +entity.get('datetime');
-                                location.accuracy = +entity.get('accuracy');
-                                location.latitude = +entity.get('latitude');
-                                location.longitude = +entity.get('longitude');
-                                location.count = +entity.get('count');
-                                location.isPayee = Boolean(+entity.get('is_payee'));
-                                location.updatedOn = new Date(+entity.get('updated_on'));
-
-                                result.addLocation(location);
+                                    result.addLocation(location);
+                                    break;
                             }
                         } else if (entity) {
                             let parts = line.match(/^(\w+):(.*)$/i);
