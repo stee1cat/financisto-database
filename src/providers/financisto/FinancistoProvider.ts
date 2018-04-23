@@ -48,6 +48,11 @@ export class FinancistoProvider {
 
                                     result.addLocation(location);
                                     break;
+                                case EntityTypes.Account:
+                                    let account = Factory.createAccount(entity);
+
+                                    result.addAccount(account);
+                                    break;
                             }
                         } else if (entity) {
                             let parts = line.match(/^(\w+):(.*)$/i);
