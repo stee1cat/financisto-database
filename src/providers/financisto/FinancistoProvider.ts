@@ -6,7 +6,8 @@ export enum EntityTypes {
     Account = 'account',
     Transaction = 'transactions',
     Location = 'locations',
-    Currency = 'currency'
+    Currency = 'currency',
+    Category = 'category'
 }
 
 enum Tags {
@@ -63,6 +64,11 @@ export class FinancistoProvider {
                                     let currency = Factory.createCurrency(entity);
 
                                     result.addCurrency(currency);
+                                    break;
+                                case EntityTypes.Category:
+                                    let category = Factory.createCategory(entity);
+
+                                    result.addCategory(category);
                                     break;
                                 default:
                                     // console.log(entity);

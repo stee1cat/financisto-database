@@ -1,5 +1,6 @@
 import { debug } from 'util';
 import { Account } from '../../models/Account';
+import { Category } from '../../models/Category';
 import { Currency } from '../../models/Currency';
 import { Location } from '../../models/Location';
 import { Transaction } from '../../models/Transaction';
@@ -91,6 +92,22 @@ export class Factory {
         currency.updatedOn = new Date(+entity.get('updated_on'));
 
         return currency;
+    }
+
+    public static createCategory(entity: Entity): Category {
+        let cateogry = new Category();
+
+        cateogry.id = +entity.get('_id');
+        cateogry.title = entity.get('title');
+        cateogry.left = +entity.get('left');
+        cateogry.right = +entity.get('right');
+        cateogry.lastLocationId = +entity.get('last_location_id');
+        cateogry.lastProjectId = +entity.get('last_project_id');
+        cateogry.sortOrder = +entity.get('sort_order');
+        cateogry.type = +entity.get('type');
+        cateogry.updatedOn = new Date(+entity.get('updated_on'));
+
+        return cateogry;
     }
 
 }
