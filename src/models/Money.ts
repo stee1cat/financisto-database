@@ -1,6 +1,7 @@
 import { Account } from './Account';
 import { Category } from './Category';
 import { Currency } from './Currency';
+import { CurrencyExchangeRate } from './CurrencyExchangeRate';
 import { Location } from './Location';
 import { Transaction } from './Transaction';
 
@@ -11,6 +12,7 @@ export class Money {
     protected locations: Location[] = [];
     protected currencies: Currency[] = [];
     protected categories: Category[] = [];
+    protected currencyExchangeRates: CurrencyExchangeRate[] = [];
 
     public getLocations(): Location[] {
         return this.locations;
@@ -50,6 +52,14 @@ export class Money {
 
     public addCategory(category: Category) {
         this.categories.push(category);
+    }
+
+    public getCurrencyExchangeRates(): CurrencyExchangeRate[] {
+        return this.currencyExchangeRates;
+    }
+
+    public addCurrencyExchangeRate(rate: CurrencyExchangeRate) {
+        this.currencyExchangeRates.push(rate);
     }
 
 }

@@ -2,6 +2,7 @@ import { debug } from 'util';
 import { Account } from '../../models/Account';
 import { Category } from '../../models/Category';
 import { Currency } from '../../models/Currency';
+import { CurrencyExchangeRate } from '../../models/CurrencyExchangeRate';
 import { Location } from '../../models/Location';
 import { Transaction } from '../../models/Transaction';
 import { Entity } from './Entity';
@@ -108,6 +109,18 @@ export class Factory {
         cateogry.updatedOn = new Date(+entity.get('updated_on'));
 
         return cateogry;
+    }
+
+    public static createCurrencyExchangeRate(entity: Entity): CurrencyExchangeRate {
+        let rate = new CurrencyExchangeRate();
+
+        rate.fromCurrencyId = +entity.get('from_currency_id');
+        rate.toCurrencyId = +entity.get('to_currency_id');
+        rate.rateDate = new Date(+entity.get('rate_date'));
+        rate.rate = +entity.get('rate');
+        rate.updatedOn = new Date(+entity.get('updated_on'));
+
+        return rate;
     }
 
 }
