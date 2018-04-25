@@ -5,7 +5,8 @@ import { Factory } from './Factory';
 export enum EntityTypes {
     Account = 'account',
     Transaction = 'transactions',
-    Location = 'locations'
+    Location = 'locations',
+    Currency = 'currency'
 }
 
 enum Tags {
@@ -57,6 +58,11 @@ export class FinancistoProvider {
                                     let transaction = Factory.createTransaction(entity);
 
                                     result.addTransaction(transaction);
+                                    break;
+                                case EntityTypes.Currency:
+                                    let currency = Factory.createCurrency(entity);
+
+                                    result.addCurrency(currency);
                                     break;
                                 default:
                                     // console.log(entity);

@@ -1,5 +1,6 @@
 import { debug } from 'util';
 import { Account } from '../../models/Account';
+import { Currency } from '../../models/Currency';
 import { Location } from '../../models/Location';
 import { Transaction } from '../../models/Transaction';
 import { Entity } from './Entity';
@@ -73,6 +74,23 @@ export class Factory {
         transaction.originalFromAmount = +entity.get('original_from_amount');
 
         return transaction;
+    }
+
+    public static createCurrency(entity: Entity): Currency {
+        let currency = new Currency();
+
+        currency.id = +entity.get('_id');
+        currency.name = entity.get('name');
+        currency.title = entity.get('title');
+        currency.symbol = entity.get('symbol');
+        currency.isDefault = Boolean(+entity.get('is_default'));
+        currency.decimals = +entity.get('decimals');
+        currency.decimalSeparator = entity.get('decimal_separator');
+        currency.groupSeparator = entity.get('group_separator');
+        currency.symbolFormat = entity.get('symbol_format');
+        currency.updatedOn = new Date(+entity.get('updated_on'));
+
+        return currency;
     }
 
 }
