@@ -53,6 +53,13 @@ export class FinancistoProvider {
 
                                     result.addAccount(account);
                                     break;
+                                case EntityTypes.Transaction:
+                                    let transaction = Factory.createTransaction(entity);
+
+                                    result.addTransaction(transaction);
+                                    break;
+                                default:
+                                    // console.log(entity);
                             }
                         } else if (entity) {
                             let parts = line.match(/^(\w+):(.*)$/i);

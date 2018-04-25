@@ -1,5 +1,7 @@
+import { debug } from 'util';
 import { Account } from '../../models/Account';
 import { Location } from '../../models/Location';
+import { Transaction } from '../../models/Transaction';
 import { Entity } from './Entity';
 
 export class Factory {
@@ -42,6 +44,35 @@ export class Factory {
         account.updatedOn = new Date(+entity.get('updated_on'));
 
         return account;
+    }
+
+    public static createTransaction(entity: Entity): Transaction {
+        let transaction = new Transaction();
+
+        transaction.id = +entity.get('_id');
+        transaction.fromAccountId = +entity.get('from_account_id');
+        transaction.toAccountId = +entity.get('to_account_id');
+        transaction.categoryId = +entity.get('category_id');
+        transaction.projectId = +entity.get('project_id');
+        transaction.locationId = +entity.get('location_id');
+        transaction.note = entity.get('note');
+        transaction.fromAmount = +entity.get('from_amount');
+        transaction.toAmount = +entity.get('to_amount');
+        transaction.datetime = new Date(+entity.get('datetime'));
+        transaction.accuracy = +entity.get('accuracy');
+        transaction.latitude = +entity.get('latitude');
+        transaction.longitude = +entity.get('longitude');
+        transaction.isTemplate = Boolean(+entity.get('is_template'));
+        transaction.status = entity.get('status');
+        transaction.isCcardPayment = Boolean(+entity.get('is_ccard_payment'));
+        transaction.lastRecurrence = new Date(+entity.get('last_recurrence'));
+        transaction.payeeId = +entity.get('payee_id');
+        transaction.parentId = +entity.get('parent_id');
+        transaction.updatedOn = new Date(+entity.get('updated_on'));
+        transaction.originalCurrencyId = +entity.get('original_currency_id');
+        transaction.originalFromAmount = +entity.get('original_from_amount');
+
+        return transaction;
     }
 
 }

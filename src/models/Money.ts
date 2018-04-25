@@ -1,10 +1,11 @@
 import { Account } from './Account';
 import { Location } from './Location';
+import { Transaction } from './Transaction';
 
 export class Money {
 
     protected accounts: Account[] = [];
-    protected transactions: any[] = [];
+    protected transactions: Transaction[] = [];
     protected locations: Location[] = [];
 
     public getLocations(): Location[] {
@@ -21,6 +22,14 @@ export class Money {
 
     public addAccount(account: Account) {
         this.accounts.push(account);
+    }
+
+    public getTransactions(): Transaction[] {
+        return this.transactions;
+    }
+
+    public addTransaction(transaction: Transaction) {
+        this.transactions.push(transaction);
     }
 
 }

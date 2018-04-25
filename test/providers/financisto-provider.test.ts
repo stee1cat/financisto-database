@@ -16,5 +16,6 @@ describe('FinancistoProvider', function () {
         expect(money).to.be.an.instanceof(Money);
         expect(money.getLocations()).to.be.an('array').lengthOf(2);
         expect(money.getAccounts()).to.be.an('array').lengthOf(2);
+        expect(money.getTransactions()).to.be.an('array').lengthOf(4);
     });
 });
