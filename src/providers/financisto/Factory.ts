@@ -4,6 +4,7 @@ import { Category } from '../../models/Category';
 import { Currency } from '../../models/Currency';
 import { CurrencyExchangeRate } from '../../models/CurrencyExchangeRate';
 import { Location } from '../../models/Location';
+import { Project } from '../../models/Project';
 import { Transaction } from '../../models/Transaction';
 import { Entity } from './Entity';
 
@@ -121,6 +122,17 @@ export class Factory {
         rate.updatedOn = new Date(+entity.get('updated_on'));
 
         return rate;
+    }
+
+    public static createProject(entity: Entity): Project {
+        let project = new Project();
+
+        project.id = +entity.get('_id');
+        project.title = entity.get('title');
+        project.isActive = Boolean(+entity.get('is_active'));
+        project.updatedOn = new Date(+entity.get('updated_on'));
+
+        return project;
     }
 
 }

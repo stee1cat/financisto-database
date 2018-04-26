@@ -1,4 +1,4 @@
-import { Money } from '../../models/Money';
+import { FinancistoDatabase } from '../../models/FinancistoDatabase';
 import { Entity } from './Entity';
 import { Factory } from './Factory';
 
@@ -8,7 +8,8 @@ export enum EntityTypes {
     Location = 'locations',
     Currency = 'currency',
     Category = 'category',
-    CurrencyExchangeRate = 'currency_exchange_rate'
+    CurrencyExchangeRate = 'currency_exchange_rate',
+    Project = 'project'
 }
 
 enum Tags {
@@ -23,11 +24,11 @@ enum Tags {
 
 export class FinancistoProvider {
 
-    public static parse(data: string): Money {
+    public static parse(data: string): FinancistoDatabase {
         let lines: string[] = data.split('\n');
         let isStart = false;
         let entityBegin = /\$ENTITY:(\w+)/i;
-        let result = new Money();
+        let result = new FinancistoDatabase();
         let entity: Entity;
 
         for (let line of lines) {
@@ -75,6 +76,11 @@ export class FinancistoProvider {
                                     let rate = Factory.createCurrencyExchangeRate(entity);
 
                                     result.addCurrencyExchangeRate(rate);
+                                    break;
+                                case EntityTypes.Project:
+                                    let project = Factory.createProject(entity);
+
+                                    result.addProject(project);
                                     break;
                                 default:
                                     // console.log(entity);
