@@ -6,7 +6,7 @@
   "scripts": {
     "start": "tsc --watch --project ./tsconfig.json",
     "build": "tsc --project ./tsconfig.json",
-    "test": "mocha --compilers ts:ts-node/register ./test/**/*.ts"
+    "test": "mocha --compilers ts:ts-node/register './test/**/*.ts'"
   },
   "keywords": [],
   "author": "Gennadiy Khatuntsev <e.steelcat@gmail.com>",
