@@ -4,12 +4,12 @@ import 'mocha';
 import { readFile, extract } from '../src/util';
 
 describe('util', function () {
-    let filename = `${__dirname}/data/20180422_154154_511.backup`;
+    let filename = `${__dirname}/data/20180426_105655_133.backup`;
 
     it('readFile', async function () {
         let file = await readFile(filename);
 
-        expect(file.byteLength).to.be.equal(945);
+        expect(file.byteLength).to.be.equal(1021);
     });
 
     it('extract', async function () {

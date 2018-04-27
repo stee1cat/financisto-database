@@ -11,15 +11,15 @@ describe('FinancistoProvider', function () {
     it('parse', async function () {
         let file = await readFile(filename);
         let data = extract(file);
-        let money: FinancistoDatabase = FinancistoProvider.parse(data);
+        let fd: FinancistoDatabase = FinancistoProvider.parse(data);
 
-        expect(money).to.be.an.instanceof(FinancistoDatabase);
-        expect(money.getLocations(), 'locations count').to.be.an('array').lengthOf(2);
-        expect(money.getAccounts(), 'accounts count').to.be.an('array').lengthOf(2);
-        expect(money.getTransactions(), 'transactions count').to.be.an('array').lengthOf(5);
-        expect(money.getCurrencies(), 'currencies count').to.be.an('array').lengthOf(2);
-        expect(money.getCategories(), 'categories count').to.be.an('array').lengthOf(4);
-        expect(money.getCurrencyExchangeRates(), 'rates count').to.be.an('array').lengthOf(2);
-        expect(money.getProjects(), 'projects count').to.be.an('array').lengthOf(1);
+        expect(fd).to.be.an.instanceof(FinancistoDatabase);
+        expect(fd.getLocations(), 'locations count').to.be.an('array').lengthOf(2);
+        expect(fd.getAccounts(), 'accounts count').to.be.an('array').lengthOf(2);
+        expect(fd.getTransactions(), 'transactions count').to.be.an('array').lengthOf(5);
+        expect(fd.getCurrencies(), 'currencies count').to.be.an('array').lengthOf(2);
+        expect(fd.getCategories(), 'categories count').to.be.an('array').lengthOf(4);
+        expect(fd.getCurrencyExchangeRates(), 'rates count').to.be.an('array').lengthOf(2);
+        expect(fd.getProjects(), 'projects count').to.be.an('array').lengthOf(1);
     });
 });

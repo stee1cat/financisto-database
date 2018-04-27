@@ -41,10 +41,10 @@ export class FinancistoProvider {
                     break;
                 default:
                     if (isStart) {
-                        let match;
+                        let isBegin = line.match(entityBegin);
 
-                        if (match = line.match(entityBegin)) {
-                            entity = new Entity(match[1]);
+                        if (isBegin) {
+                            entity = new Entity(isBegin[1]);
                         } else if (entity && line === Tags.EntityEnd) {
                             switch (entity.name) {
                                 case EntityTypes.Location:
@@ -89,7 +89,7 @@ export class FinancistoProvider {
                             let parts = line.match(/^(\w+):(.*)$/i);
 
                             if (parts) {
-                                entity.push(parts[1], parts[2])
+                                entity.push(parts[1], parts[2]);
                             }
                         }
                     }
