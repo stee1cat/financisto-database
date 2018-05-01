@@ -8,52 +8,72 @@ import { Transaction } from './Transaction';
 
 export class FinancistoDatabase {
 
-    protected accounts: Account[] = [];
-    protected transactions: Transaction[] = [];
-    protected locations: Location[] = [];
-    protected currencies: Currency[] = [];
-    protected categories: Category[] = [];
+    protected accounts: Map<number, Account> = new Map<number, Account>();
+    protected transactions: Map<number, Transaction> = new Map<number, Transaction>();
+    protected locations: Map<number, Location> = new Map<number, Location>();
+    protected currencies: Map<number, Currency> = new Map<number, Currency>();
+    protected categories: Map<number, Category> = new Map<number, Category>();
     protected currencyExchangeRates: CurrencyExchangeRate[] = [];
-    protected projects: Project[] = [];
+    protected projects: Map<number, Project> = new Map<number, Project>();
 
     public getLocations(): Location[] {
-        return this.locations;
+        return Array.from(this.locations.values());
     }
 
     public addLocation(location: Location) {
-        this.locations.push(location);
+        this.locations.set(location.id, location);
+    }
+
+    public getLocation(id: number): Location {
+        return this.locations.get(id);
     }
 
     public getAccounts(): Account[] {
-        return this.accounts;
+        return Array.from(this.accounts.values());
     }
 
     public addAccount(account: Account) {
-        this.accounts.push(account);
+        this.accounts.set(account.id, account);
+    }
+
+    public getAccount(id: number): Account {
+        return this.accounts.get(id);
     }
 
     public getTransactions(): Transaction[] {
-        return this.transactions;
+        return Array.from(this.transactions.values());
     }
 
     public addTransaction(transaction: Transaction) {
-        this.transactions.push(transaction);
+        this.transactions.set(transaction.id, transaction);
+    }
+
+    public getTransaction(id: number): Transaction {
+        return this.transactions.get(id);
     }
 
     public getCurrencies(): Currency[] {
-        return this.currencies;
+        return Array.from(this.currencies.values());
     }
 
     public addCurrency(currency: Currency) {
-        this.currencies.push(currency);
+        this.currencies.set(currency.id, currency);
+    }
+
+    public getCurrency(id: number): Currency {
+        return this.currencies.get(id);
     }
 
     public getCategories(): Category[] {
-        return this.categories;
+        return Array.from(this.categories.values());
     }
 
     public addCategory(category: Category) {
-        this.categories.push(category);
+        this.categories.set(category.id, category);
+    }
+
+    public getCategory(id: number): Category {
+        return this.categories.get(id);
     }
 
     public getCurrencyExchangeRates(): CurrencyExchangeRate[] {
@@ -65,11 +85,15 @@ export class FinancistoDatabase {
     }
 
     public getProjects(): Project[] {
-        return this.projects;
+        return Array.from(this.projects.values());
     }
 
     public addProject(project: Project) {
-        this.projects.push(project);
+        this.projects.set(project.id, project);
+    }
+
+    public getProject(id: number): Project {
+        return this.projects.get(id);
     }
 
 }
