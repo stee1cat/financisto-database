@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<ability-cash>
+    <export-options>
+        <export-date>2018-05-01T16:59:07.678Z</export-date>
+    </export-options>
+    <currencies>
+        <currency>
+            <name>Russian rouble</name>
+            <code>RUR</code>
+            <precision>2</precision>
+        </currency>
+        <currency>
+            <name>Euro</name>
+            <code>EUR</code>
+            <precision>2</precision>
+        </currency>
+    </currencies>
+</ability-cash>

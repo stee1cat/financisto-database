@@ -23,6 +23,7 @@
     "typescript": "^2.8.1"
   },
   "dependencies": {
-    "pako": "^1.0.6"
+    "pako": "^1.0.6",
+    "xmlbuilder": "^10.0.0"
   }
 }
