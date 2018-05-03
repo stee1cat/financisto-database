@@ -47,7 +47,6 @@ export class XmlBuilder {
 
                 account.ele('name', a.title);
                 account.ele('init-balance', 0);
-                // @todo: comment
 
                 if (currency) {
                     account.ele('currency', prepareCode(currency.name));
@@ -55,6 +54,10 @@ export class XmlBuilder {
 
                 if (!a.isActive) {
                     account.ele('locked');
+                }
+
+                if (a.note) {
+                    account.ele('comment', a.note);
                 }
             }
         }

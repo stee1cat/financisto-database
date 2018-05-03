@@ -6,7 +6,7 @@ import { FinancistoDatabase } from '../../src/models/FinancistoDatabase';
 import { readFile, extract } from '../../src/util';
 
 describe('FinancistoProvider', function () {
-    let filename = `${__dirname}/../data/20180426_105655_133.backup`;
+    let filename = `${__dirname}/../data/20180503_100107_997.backup`;
 
     it('parse', async function () {
         let file = await readFile(filename);

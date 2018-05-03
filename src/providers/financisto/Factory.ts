@@ -32,6 +32,7 @@ export class Factory {
 
         account.id = +entity.get('_id');
         account.title = entity.get('title');
+        account.note = entity.get('note');
         account.creationDate = new Date(+entity.get('creation_date'));
         account.currencyId = +entity.get('currency_id');
         account.totalAmount = +entity.get('total_amount');

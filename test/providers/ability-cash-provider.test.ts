@@ -18,10 +18,10 @@ describe('AbilityCashProvider', function () {
     });
 
     it('generate', async function () {
-        let fSource = extract(await readFile(`${__dirname}/../data/20180426_105655_133.backup`));
+        let fSource = extract(await readFile(`${__dirname}/../data/20180503_100107_997.backup`));
         let fd: FinancistoDatabase = FinancistoProvider.parse(fSource);
 
-        let aSource = await readFile(`${__dirname}/../data/20180426_105655_133.xml`);
+        let aSource = await readFile(`${__dirname}/../data/20180503_100107_997.xml`);
         let xml = AbilityCashProvider.generate(fd);
 
         expect(removeExportDate(xml)).to.be.equal(removeExportDate(aSource.toString()));

@@ -2,6 +2,7 @@ export class Account {
 
     private _id: number;
     private _title: string;
+    private _note: string;
     private _creationDate: Date;
     private _currencyId: number;
     private _totalAmount: number;
@@ -31,6 +32,14 @@ export class Account {
 
     set title(value: string) {
         this._title = value;
+    }
+
+    get note(): string {
+        return this._note;
+    }
+
+    set note(value: string) {
+        this._note = value;
     }
 
     get creationDate(): Date {

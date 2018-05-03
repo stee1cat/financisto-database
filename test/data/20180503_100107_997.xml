@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <ability-cash>
     <export-options>
-        <export-date>2018-05-02T04:35:31.381Z</export-date>
+        <export-date>2018-05-03T05:20:27.909Z</export-date>
     </export-options>
     <currencies>
         <currency>
@@ -20,6 +20,7 @@
             <name>Cash (RUR)</name>
             <init-balance>0</init-balance>
             <currency>RUR</currency>
+            <comment>cash account comment</comment>
         </account>
         <account>
             <name>Cash (EUR)</name>
