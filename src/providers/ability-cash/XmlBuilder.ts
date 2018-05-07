@@ -1,5 +1,5 @@
 import * as builder from 'xmlbuilder';
-
+import { Category } from '../../models/Category';
 import { FinancistoDatabase } from '../../models/FinancistoDatabase';
 
 export function prepareCode(code: string): string {
@@ -62,10 +62,34 @@ export class XmlBuilder {
             }
         }
 
+        let categories = fd.getCategories();
+        if (categories.length > 0) {
+            let classifiers = root.ele('classifiers');
+            let classifier = classifiers.ele('classifier');
+
+            classifier.ele('singular-name', 'Category');
+            classifier.ele('plural-name', 'Categories');
+
+            XmlBuilder.walk(categories, classifier.ele('single-tree'));
+        }
+
         return root.end({
             pretty: true,
             indent: ' '.padStart(4)
         });
+    }
+
+    private static walk(list: Category[], parent) {
+        for (let item of list) {
+            let category = parent.ele('category');
+
+            category.att('changed-at', item.updatedOn.toISOString());
+            category.ele('name', item.title);
+
+            if (item.children.length) {
+                XmlBuilder.walk(item.children, category);
+            }
+        }
     }
 
 }

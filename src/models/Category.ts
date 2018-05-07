@@ -9,6 +9,7 @@ export class Category {
     private _sortOrder: number;
     private _type: number;
     private _updatedOn: Date;
+    private _children: Category[] = [];
 
     get id(): number {
         return this._id;
@@ -80,6 +81,14 @@ export class Category {
 
     set updatedOn(value: Date) {
         this._updatedOn = value;
+    }
+
+    get children(): Category[] {
+        return this._children;
+    }
+
+    set children(value: Category[]) {
+        this._children = value;
     }
 
 }

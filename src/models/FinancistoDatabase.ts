@@ -1,3 +1,4 @@
+import { createTree } from '../util';
 import { Account } from './Account';
 import { Category } from './Category';
 import { Currency } from './Currency';
@@ -65,7 +66,9 @@ export class FinancistoDatabase {
     }
 
     public getCategories(): Category[] {
-        return Array.from(this.categories.values());
+        let categories: Category[] = Array.from(this.categories.values());
+
+        return createTree(categories);
     }
 
     public addCategory(category: Category) {

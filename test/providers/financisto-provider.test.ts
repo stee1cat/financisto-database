@@ -18,7 +18,11 @@ describe('FinancistoProvider', function () {
         expect(fd.getAccounts(), 'accounts count').to.be.an('array').lengthOf(2);
         expect(fd.getTransactions(), 'transactions count').to.be.an('array').lengthOf(5);
         expect(fd.getCurrencies(), 'currencies count').to.be.an('array').lengthOf(2);
-        expect(fd.getCategories(), 'categories count').to.be.an('array').lengthOf(4);
+
+        let categories = fd.getCategories();
+        expect(categories, 'categories count').to.be.an('array').lengthOf(3);
+        expect(categories[0].children, 'subcategories count').to.be.an('array').lengthOf(1);
+
         expect(fd.getCurrencyExchangeRates(), 'rates count').to.be.an('array').lengthOf(2);
         expect(fd.getProjects(), 'projects count').to.be.an('array').lengthOf(1);
     });
