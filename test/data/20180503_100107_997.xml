@@ -1,8 +1,37 @@
 <?xml version="1.0"?>
 <ability-cash>
     <export-options>
-        <export-date>2018-05-07T05:52:56.243Z</export-date>
+        <export-date>2018-05-08T10:15:13.698Z</export-date>
     </export-options>
+    <classifiers>
+        <classifier>
+            <singular-name>Category</singular-name>
+            <plural-name>Categories</plural-name>
+            <single-tree>
+                <category changed-at="1970-01-01T00:00:00.000Z">
+                    <name>Entertainment</name>
+                    <category changed-at="1970-01-01T00:00:00.000Z">
+                        <name>Cinema</name>
+                    </category>
+                </category>
+                <category changed-at="1970-01-01T00:00:00.000Z">
+                    <name>Food</name>
+                </category>
+                <category changed-at="1970-01-01T00:00:00.000Z">
+                    <name>Transport</name>
+                </category>
+            </single-tree>
+        </classifier>
+        <classifier>
+            <single-tree>
+                <category changed-at="2018-04-26T05:55:36.688Z">
+                    <name>Travel</name>
+                </category>
+            </single-tree>
+            <singular-name>Project</singular-name>
+            <plural-name>Projects</plural-name>
+        </classifier>
+    </classifiers>
     <currencies>
         <currency>
             <name>Russian rouble</name>
@@ -28,24 +57,4 @@
             <currency>EUR</currency>
         </account>
     </accounts>
-    <classifiers>
-        <classifier>
-            <singular-name>Category</singular-name>
-            <plural-name>Categories</plural-name>
-            <single-tree>
-                <category changed-at="1970-01-01T00:00:00.000Z">
-                    <name>Entertainment</name>
-                    <category changed-at="1970-01-01T00:00:00.000Z">
-                        <name>Cinema</name>
-                    </category>
-                </category>
-                <category changed-at="1970-01-01T00:00:00.000Z">
-                    <name>Food</name>
-                </category>
-                <category changed-at="1970-01-01T00:00:00.000Z">
-                    <name>Transport</name>
-                </category>
-            </single-tree>
-        </classifier>
-    </classifiers>
 </ability-cash>

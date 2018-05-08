@@ -23,6 +23,7 @@ export class XmlBuilder {
             .ele('export-options')
                 .ele('export-date', (new Date()).toISOString())
                 .root();
+        let classifiers = root.ele('classifiers');
 
         let currencies = fd.getCurrencies();
         if (currencies.length > 0) {
@@ -64,13 +65,28 @@ export class XmlBuilder {
 
         let categories = fd.getCategories();
         if (categories.length > 0) {
-            let classifiers = root.ele('classifiers');
             let classifier = classifiers.ele('classifier');
 
             classifier.ele('singular-name', 'Category');
             classifier.ele('plural-name', 'Categories');
 
             XmlBuilder.walk(categories, classifier.ele('single-tree'));
+        }
+
+        let projects = fd.getProjects();
+        if (projects.length > 0) {
+            let classifier = classifiers.ele('classifier');
+            let tree = classifier.ele('single-tree');
+
+            classifier.ele('singular-name', 'Project');
+            classifier.ele('plural-name', 'Projects');
+
+            for (let project of projects) {
+                let category = tree.ele('category');
+
+                category.att('changed-at', project.updatedOn.toISOString());
+                category.ele('name', project.title);
+            }
         }
 
         return root.end({
