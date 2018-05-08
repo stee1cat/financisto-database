@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <ability-cash>
     <export-options>
-        <export-date>2018-05-08T10:15:13.698Z</export-date>
+        <export-date>2018-05-08T10:23:02.096Z</export-date>
     </export-options>
     <classifiers>
         <classifier>
@@ -23,13 +23,25 @@
             </single-tree>
         </classifier>
         <classifier>
+            <singular-name>Project</singular-name>
+            <plural-name>Projects</plural-name>
             <single-tree>
                 <category changed-at="2018-04-26T05:55:36.688Z">
                     <name>Travel</name>
                 </category>
             </single-tree>
-            <singular-name>Project</singular-name>
-            <plural-name>Projects</plural-name>
+        </classifier>
+        <classifier>
+            <singular-name>Location</singular-name>
+            <plural-name>Locations</plural-name>
+            <single-tree>
+                <category changed-at="2018-04-21T11:58:47.339Z">
+                    <name>Crystal</name>
+                </category>
+                <category changed-at="2018-04-21T11:59:56.068Z">
+                    <name>Family</name>
+                </category>
+            </single-tree>
         </classifier>
     </classifiers>
     <currencies>

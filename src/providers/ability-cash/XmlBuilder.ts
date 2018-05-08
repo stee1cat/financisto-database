@@ -76,16 +76,32 @@ export class XmlBuilder {
         let projects = fd.getProjects();
         if (projects.length > 0) {
             let classifier = classifiers.ele('classifier');
-            let tree = classifier.ele('single-tree');
 
             classifier.ele('singular-name', 'Project');
             classifier.ele('plural-name', 'Projects');
 
+            let tree = classifier.ele('single-tree');
             for (let project of projects) {
                 let category = tree.ele('category');
 
                 category.att('changed-at', project.updatedOn.toISOString());
                 category.ele('name', project.title);
+            }
+        }
+
+        let locations = fd.getLocations();
+        if (locations.length > 0) {
+            let classifier = classifiers.ele('classifier');
+
+            classifier.ele('singular-name', 'Location');
+            classifier.ele('plural-name', 'Locations');
+
+            let tree = classifier.ele('single-tree');
+            for (let location of locations) {
+                let category = tree.ele('category');
+
+                category.att('changed-at', location.updatedOn.toISOString());
+                category.ele('name', location.title);
             }
         }
 
