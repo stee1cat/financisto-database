@@ -18,4 +18,16 @@ export class Entity {
         return this._fields[key];
     }
 
+    public getNumber(key: string): number {
+        return +this.get(key);
+    }
+
+    public getDate(key: string): Date {
+        return new Date(+this.get(key));
+    }
+
+    public getBoolean(key: string): boolean {
+        return Boolean(+this.get(key));
+    }
+
 }
