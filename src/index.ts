@@ -1,11 +1,18 @@
+#!/usr/bin/env node
+
 import { AbilityCashProvider } from './providers/ability-cash/AbilityCashProvider';
 import { FinancistoProvider } from './providers/financisto/FinancistoProvider';
-import { extract, readFile } from './util';
+import { extract, readFile, writeFile } from './util';
+import { CLI } from './CLI';
 
-readFile(`${__dirname}/../test/data/20180503_100107_997.backup`)
-    .then(function (file) {
-        let data = extract(file);
+const cli = new CLI();
+const args = cli.getArguments();
 
-        let fd = FinancistoProvider.parse(data);
-        let xml = AbilityCashProvider.generate(fd);
+readFile(args.input)
+    .then(async function (file) {
+        const data = extract(file);
+        const fd = FinancistoProvider.parse(data);
+        const xml = AbilityCashProvider.generate(fd);
+
+        await writeFile(args.output, xml);
     });

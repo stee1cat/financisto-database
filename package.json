@@ -10,6 +10,9 @@
     "test:win": "mocha -r ts-node/register ./test/**/*.ts"
   },
   "keywords": [],
+  "bin": {
+    "financisto-database": "./dist/index.js"
+  },
   "author": "Gennadiy Khatuntsev <e.steelcat@gmail.com>",
   "license": "ISC",
   "devDependencies": {
@@ -23,6 +26,7 @@
     "typescript": "^2.8.1"
   },
   "dependencies": {
+    "minimist": "^1.2.0",
     "pako": "^1.0.6",
     "xmlbuilder": "^10.0.0"
   }

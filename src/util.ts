@@ -3,6 +3,7 @@ import { promisify } from 'util';
 import * as pako from 'pako';
 
 export const readFile = promisify(fs.readFile);
+export const writeFile = promisify(fs.writeFile);
 
 export function extract(data: Buffer): string {
     return pako.inflate(data, {
