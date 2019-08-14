@@ -17,20 +17,19 @@ export function prepareCode(code: string): string {
 }
 
 export class XmlBuilder {
-
     public static build(fd: FinancistoDatabase): string {
-        let root = builder.create('ability-cash')
+        const root = builder.create('ability-cash')
             .ele('export-options')
                 .ele('export-date', (new Date()).toISOString())
                 .root();
-        let classifiers = root.ele('classifiers');
+        const classifiers = root.ele('classifiers');
 
-        let currencies = fd.getCurrencies();
+        const currencies = fd.getCurrencies();
         if (currencies.length > 0) {
-            let section = root.ele('currencies');
+            const section = root.ele('currencies');
 
-            for (let c of currencies) {
-                let currency = section.ele('currency');
+            for (const c of currencies) {
+                const currency = section.ele('currency');
 
                 currency.ele('name', c.title);
                 currency.ele('code', prepareCode(c.name));
@@ -38,13 +37,13 @@ export class XmlBuilder {
             }
         }
 
-        let accounts = fd.getAccounts();
+        const accounts = fd.getAccounts();
         if (accounts.length > 0) {
-            let section = root.ele('accounts');
+            const section = root.ele('accounts');
 
-            for (let a of accounts) {
-                let account = section.ele('account');
-                let currency = fd.getCurrency(a.currencyId);
+            for (const a of accounts) {
+                const account = section.ele('account');
+                const currency = fd.getCurrency(a.currencyId);
 
                 account.ele('name', a.title);
                 account.ele('init-balance', 0);
@@ -63,9 +62,9 @@ export class XmlBuilder {
             }
         }
 
-        let categories = fd.getCategories();
+        const categories = fd.getCategories();
         if (categories.length > 0) {
-            let classifier = classifiers.ele('classifier');
+            const classifier = classifiers.ele('classifier');
 
             classifier.ele('singular-name', 'Category');
             classifier.ele('plural-name', 'Categories');
@@ -73,32 +72,32 @@ export class XmlBuilder {
             XmlBuilder.walk(categories, classifier.ele('single-tree'));
         }
 
-        let projects = fd.getProjects();
+        const projects = fd.getProjects();
         if (projects.length > 0) {
-            let classifier = classifiers.ele('classifier');
+            const classifier = classifiers.ele('classifier');
 
             classifier.ele('singular-name', 'Project');
             classifier.ele('plural-name', 'Projects');
 
-            let tree = classifier.ele('single-tree');
-            for (let project of projects) {
-                let category = tree.ele('category');
+            const tree = classifier.ele('single-tree');
+            for (const project of projects) {
+                const category = tree.ele('category');
 
                 category.att('changed-at', project.updatedOn.toISOString());
                 category.ele('name', project.title);
             }
         }
 
-        let locations = fd.getLocations();
+        const locations = fd.getLocations();
         if (locations.length > 0) {
-            let classifier = classifiers.ele('classifier');
+            const classifier = classifiers.ele('classifier');
 
             classifier.ele('singular-name', 'Location');
             classifier.ele('plural-name', 'Locations');
 
-            let tree = classifier.ele('single-tree');
-            for (let location of locations) {
-                let category = tree.ele('category');
+            const tree = classifier.ele('single-tree');
+            for (const location of locations) {
+                const category = tree.ele('category');
 
                 category.att('changed-at', location.updatedOn.toISOString());
                 category.ele('name', location.title);
@@ -107,13 +106,13 @@ export class XmlBuilder {
 
         return root.end({
             pretty: true,
-            indent: ' '.padStart(4)
+            indent: ' '.padStart(4),
         });
     }
 
     private static walk(list: Category[], parent) {
-        for (let item of list) {
-            let category = parent.ele('category');
+        for (const item of list) {
+            const category = parent.ele('category');
 
             category.att('changed-at', item.updatedOn.toISOString());
             category.ele('name', item.title);
@@ -123,5 +122,4 @@ export class XmlBuilder {
             }
         }
     }
-
 }

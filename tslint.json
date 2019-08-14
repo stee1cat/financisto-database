@@ -2,6 +2,9 @@
   "extends": [
     "tslint:recommended"
   ],
+  "rulesDirectory": [
+    "node_modules/codelyzer"
+  ],
   "rules": {
     "no-var-requires": false,
     "arrow-parens": [
@@ -10,7 +13,7 @@
     ],
     "only-arrow-functions": false,
     "trailing-comma": [
-      false,
+      true,
       {
         "multiline": "always",
         "singleline": "never"
@@ -39,7 +42,7 @@
         "method": "never"
       }
     ],
-    "prefer-const": false,
+    "prefer-const": true,
     "whitespace": [
       true,
       "check-branch",

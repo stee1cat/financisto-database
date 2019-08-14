@@ -8,9 +8,8 @@ import { Transaction } from '../../models/Transaction';
 import { Entity } from './Entity';
 
 export class Factory {
-
     public static createLocation(entity: Entity): Location {
-        let location = new Location();
+        const location = new Location();
 
         location.id = entity.getNumber('_id');
         location.name = entity.get('name');
@@ -27,7 +26,7 @@ export class Factory {
     }
 
     public static createAccount(entity: Entity): Account {
-        let account = new Account();
+        const account = new Account();
 
         account.id = entity.getNumber('_id');
         account.title = entity.get('title');
@@ -51,7 +50,7 @@ export class Factory {
     }
 
     public static createTransaction(entity: Entity): Transaction {
-        let transaction = new Transaction();
+        const transaction = new Transaction();
 
         transaction.id = entity.getNumber('_id');
         transaction.fromAccountId = entity.getNumber('from_account_id');
@@ -80,7 +79,7 @@ export class Factory {
     }
 
     public static createCurrency(entity: Entity): Currency {
-        let currency = new Currency();
+        const currency = new Currency();
 
         currency.id = entity.getNumber('_id');
         currency.name = entity.get('name');
@@ -97,7 +96,7 @@ export class Factory {
     }
 
     public static createCategory(entity: Entity): Category {
-        let cateogry = new Category();
+        const cateogry = new Category();
 
         cateogry.id = entity.getNumber('_id');
         cateogry.title = entity.get('title');
@@ -113,7 +112,7 @@ export class Factory {
     }
 
     public static createCurrencyExchangeRate(entity: Entity): CurrencyExchangeRate {
-        let rate = new CurrencyExchangeRate();
+        const rate = new CurrencyExchangeRate();
 
         rate.fromCurrencyId = entity.getNumber('from_currency_id');
         rate.toCurrencyId = entity.getNumber('to_currency_id');
@@ -125,7 +124,7 @@ export class Factory {
     }
 
     public static createProject(entity: Entity): Project {
-        let project = new Project();
+        const project = new Project();
 
         project.id = entity.getNumber('_id');
         project.title = entity.get('title');
@@ -134,5 +133,4 @@ export class Factory {
 
         return project;
     }
-
 }

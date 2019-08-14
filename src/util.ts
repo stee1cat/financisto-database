@@ -7,16 +7,16 @@ export const writeFile = promisify(fs.writeFile);
 
 export function extract(data: Buffer): string {
     return pako.inflate(data, {
-        to: 'string'
+        to: 'string',
     });
 }
 
 export function createTree(nodes, left = 1, right = false) {
-    let tree = [];
+    const tree = [];
 
-    for (let node of nodes) {
+    for (const node of nodes) {
         if (node.left === left + 1 && (!right || node.right < right)) {
-            let n = cloneObject(node);
+            const n = cloneObject(node);
 
             n.children = createTree(nodes, node.left, node.right);
             tree.push(n);
@@ -28,8 +28,8 @@ export function createTree(nodes, left = 1, right = false) {
 }
 
 export function cloneObject(obj) {
-    let clone = Object.create(Object.getPrototypeOf(obj));
-    let descriptors = Object.getOwnPropertyDescriptors(obj);
+    const clone = Object.create(Object.getPrototypeOf(obj));
+    const descriptors = Object.getOwnPropertyDescriptors(obj);
 
     Object.defineProperties(clone, descriptors);
 

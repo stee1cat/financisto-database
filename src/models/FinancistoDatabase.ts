@@ -8,7 +8,6 @@ import { Project } from './Project';
 import { Transaction } from './Transaction';
 
 export class FinancistoDatabase {
-
     protected accounts: Map<number, Account> = new Map<number, Account>();
     protected transactions: Map<number, Transaction> = new Map<number, Transaction>();
     protected locations: Map<number, Location> = new Map<number, Location>();
@@ -66,7 +65,7 @@ export class FinancistoDatabase {
     }
 
     public getCategories(): Category[] {
-        let categories: Category[] = Array.from(this.categories.values());
+        const categories: Category[] = Array.from(this.categories.values());
 
         return createTree(categories);
     }
@@ -98,5 +97,4 @@ export class FinancistoDatabase {
     public getProject(id: number): Project {
         return this.projects.get(id);
     }
-
 }
