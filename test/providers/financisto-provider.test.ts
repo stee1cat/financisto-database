@@ -19,7 +19,7 @@ describe('FinancistoProvider', function () {
         expect(fd.getTransactions(), 'transactions count').to.be.an('array').lengthOf(5);
         expect(fd.getCurrencies(), 'currencies count').to.be.an('array').lengthOf(2);
 
-        let categories = fd.getCategories();
+        const categories = fd.getTreeOfCategories().getTree();
         expect(categories, 'categories count').to.be.an('array').lengthOf(3);
         expect(categories[0].children, 'subcategories count').to.be.an('array').lengthOf(1);
 

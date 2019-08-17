@@ -1,5 +1,4 @@
 export class Transaction {
-
     private _id: number;
     private _fromAccountId: number;
     private _toAccountId: number;
@@ -23,180 +22,191 @@ export class Transaction {
     private _originalCurrencyId: number;
     private _originalFromAmount: number;
 
-    get id(): number {
+    public get id(): number {
         return this._id;
     }
 
-    set id(value: number) {
+    public set id(value: number) {
         this._id = value;
     }
 
-    get fromAccountId(): number {
+    public get fromAccountId(): number {
         return this._fromAccountId;
     }
 
-    set fromAccountId(value: number) {
+    public set fromAccountId(value: number) {
         this._fromAccountId = value;
     }
 
-    get toAccountId(): number {
+    public get toAccountId(): number {
         return this._toAccountId;
     }
 
-    set toAccountId(value: number) {
+    public set toAccountId(value: number) {
         this._toAccountId = value;
     }
 
-    get categoryId(): number {
+    public get categoryId(): number {
         return this._categoryId;
     }
 
-    set categoryId(value: number) {
+    public set categoryId(value: number) {
         this._categoryId = value;
     }
 
-    get projectId(): number {
+    public get projectId(): number {
         return this._projectId;
     }
 
-    set projectId(value: number) {
+    public set projectId(value: number) {
         this._projectId = value;
     }
 
-    get locationId(): number {
+    public get locationId(): number {
         return this._locationId;
     }
 
-    set locationId(value: number) {
+    public set locationId(value: number) {
         this._locationId = value;
     }
 
-    get note(): string {
-        return this._note;
+    public get note(): string {
+        return (this._note || '').trim();
     }
 
-    set note(value: string) {
+    public set note(value: string) {
         this._note = value;
     }
 
-    get fromAmount(): number {
+    public get fromAmount(): number {
         return this._fromAmount;
     }
 
-    set fromAmount(value: number) {
+    public set fromAmount(value: number) {
         this._fromAmount = value;
     }
 
-    get toAmount(): number {
+    public get toAmount(): number {
         return this._toAmount;
     }
 
-    set toAmount(value: number) {
+    public set toAmount(value: number) {
         this._toAmount = value;
     }
 
-    get datetime(): Date {
+    public get date(): string {
+        const d = this.datetime;
+        const month = d.getMonth().toString().padStart(2, '0');
+        const date = d.getDate().toString().padStart(2, '0');
+
+        return `${d.getFullYear()}-${month}-${date}`;
+    }
+
+    public get datetime(): Date {
         return this._datetime;
     }
 
-    set datetime(value: Date) {
+    public set datetime(value: Date) {
         this._datetime = value;
     }
 
-    get accuracy(): number {
+    public get accuracy(): number {
         return this._accuracy;
     }
 
-    set accuracy(value: number) {
+    public set accuracy(value: number) {
         this._accuracy = value;
     }
 
-    get latitude(): number {
+    public get latitude(): number {
         return this._latitude;
     }
 
-    set latitude(value: number) {
+    public set latitude(value: number) {
         this._latitude = value;
     }
 
-    get longitude(): number {
+    public get longitude(): number {
         return this._longitude;
     }
 
-    set longitude(value: number) {
+    public set longitude(value: number) {
         this._longitude = value;
     }
 
-    get isTemplate(): boolean {
+    public get isTransfer(): boolean {
+        return this.fromAccountId !== 0 && this.toAccountId !== 0;
+    }
+
+    public get isTemplate(): boolean {
         return this._isTemplate;
     }
 
-    set isTemplate(value: boolean) {
+    public set isTemplate(value: boolean) {
         this._isTemplate = value;
     }
 
-    get status(): string {
+    public get status(): string {
         return this._status;
     }
 
-    set status(value: string) {
+    public set status(value: string) {
         this._status = value;
     }
 
-    get isCcardPayment(): boolean {
+    public get isCcardPayment(): boolean {
         return this._isCcardPayment;
     }
 
-    set isCcardPayment(value: boolean) {
+    public set isCcardPayment(value: boolean) {
         this._isCcardPayment = value;
     }
 
-    get lastRecurrence(): Date {
+    public get lastRecurrence(): Date {
         return this._lastRecurrence;
     }
 
-    set lastRecurrence(value: Date) {
+    public set lastRecurrence(value: Date) {
         this._lastRecurrence = value;
     }
 
-    get payeeId(): number {
+    public get payeeId(): number {
         return this._payeeId;
     }
 
-    set payeeId(value: number) {
+    public set payeeId(value: number) {
         this._payeeId = value;
     }
 
-    get parentId(): number {
+    public get parentId(): number {
         return this._parentId;
     }
 
-    set parentId(value: number) {
+    public set parentId(value: number) {
         this._parentId = value;
     }
 
-    get updatedOn(): Date {
+    public get updatedOn(): Date {
         return this._updatedOn;
     }
 
-    set updatedOn(value: Date) {
+    public set updatedOn(value: Date) {
         this._updatedOn = value;
     }
 
-    get originalCurrencyId(): number {
+    public get originalCurrencyId(): number {
         return this._originalCurrencyId;
     }
 
-    set originalCurrencyId(value: number) {
+    public set originalCurrencyId(value: number) {
         this._originalCurrencyId = value;
     }
 
-    get originalFromAmount(): number {
+    public get originalFromAmount(): number {
         return this._originalFromAmount;
     }
 
-    set originalFromAmount(value: number) {
+    public set originalFromAmount(value: number) {
         this._originalFromAmount = value;
     }
-
 }

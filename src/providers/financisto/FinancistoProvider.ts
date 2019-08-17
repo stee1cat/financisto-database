@@ -8,6 +8,7 @@ export enum EntityTypes {
     Location = 'locations',
     Currency = 'currency',
     Category = 'category',
+    Payee = 'payee',
     CurrencyExchangeRate = 'currency_exchange_rate',
     Project = 'project',
 }
@@ -80,6 +81,11 @@ export class FinancistoProvider {
                                     const project = Factory.createProject(entity);
 
                                     result.addProject(project);
+                                    break;
+                                case EntityTypes.Payee:
+                                    const payee = Factory.createPayee(entity);
+
+                                    result.addPayee(payee);
                                     break;
                                 default:
                                     // console.log(entity);

@@ -1,4 +1,3 @@
-import { createTree } from '../util';
 import { Account } from './Account';
 import { Category } from './Category';
 import { Currency } from './Currency';
@@ -6,6 +5,8 @@ import { CurrencyExchangeRate } from './CurrencyExchangeRate';
 import { Location } from './Location';
 import { Project } from './Project';
 import { Transaction } from './Transaction';
+import { Payee } from './Payee';
+import { Tree } from './Tree';
 
 export class FinancistoDatabase {
     protected accounts: Map<number, Account> = new Map<number, Account>();
@@ -15,6 +16,9 @@ export class FinancistoDatabase {
     protected categories: Map<number, Category> = new Map<number, Category>();
     protected currencyExchangeRates: CurrencyExchangeRate[] = [];
     protected projects: Map<number, Project> = new Map<number, Project>();
+    protected payees: Map<number, Payee> = new Map<number, Payee>();
+    protected treeOfCategories: Tree<Category>;
+    protected treeOfCategoriesIsInvalidated: boolean = false;
 
     public getLocations(): Location[] {
         return Array.from(this.locations.values());
@@ -64,13 +68,19 @@ export class FinancistoDatabase {
         return this.currencies.get(id);
     }
 
-    public getCategories(): Category[] {
-        const categories: Category[] = Array.from(this.categories.values());
+    public getTreeOfCategories(): Tree<Category> {
+        if (this.treeOfCategoriesIsInvalidated || !this.treeOfCategories) {
+            const categories: Category[] = Array.from(this.categories.values());
 
-        return createTree(categories);
+            this.treeOfCategoriesIsInvalidated = false;
+            this.treeOfCategories = new Tree(categories);
+        }
+
+        return this.treeOfCategories;
     }
 
     public addCategory(category: Category) {
+        this.treeOfCategoriesIsInvalidated = true;
         this.categories.set(category.id, category);
     }
 
@@ -96,5 +106,17 @@ export class FinancistoDatabase {
 
     public getProject(id: number): Project {
         return this.projects.get(id);
+    }
+
+    public getPayees(): Payee[] {
+        return Array.from(this.payees.values());
+    }
+
+    public addPayee(payee: Payee) {
+        this.payees.set(payee.id, payee);
+    }
+
+    public getPayee(id: number): Payee {
+        return this.payees.get(id);
     }
 }

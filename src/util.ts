@@ -1,6 +1,7 @@
 import * as fs from 'fs';
 import { promisify } from 'util';
 import * as pako from 'pako';
+import { INode } from './models/INode';
 
 export const readFile = promisify(fs.readFile);
 export const writeFile = promisify(fs.writeFile);
@@ -11,14 +12,15 @@ export function extract(data: Buffer): string {
     });
 }
 
-export function createTree(nodes, left = 1, right = false) {
-    const tree = [];
+export function createTree(nodes: INode[], left = -1, right = Number.MAX_SAFE_INTEGER, parentId = null): INode[] {
+    const tree: INode[] = [];
 
     for (const node of nodes) {
-        if (node.left === left + 1 && (!right || node.right < right)) {
+        if (node.left > left && node.right < right) {
             const n = cloneObject(node);
 
-            n.children = createTree(nodes, node.left, node.right);
+            n.parentId = parentId;
+            n.children = createTree(nodes, node.left, node.right, n.id);
             tree.push(n);
             left = node.right;
         }

@@ -3,11 +3,23 @@ import { Category } from '../../models/Category';
 import { Currency } from '../../models/Currency';
 import { CurrencyExchangeRate } from '../../models/CurrencyExchangeRate';
 import { Location } from '../../models/Location';
+import { Payee } from '../../models/Payee';
 import { Project } from '../../models/Project';
 import { Transaction } from '../../models/Transaction';
 import { Entity } from './Entity';
 
 export class Factory {
+    public static createPayee(entity: Entity): Payee {
+        const payee = new Payee();
+
+        payee.id = entity.getNumber('_id');
+        payee.title = entity.get('title');
+        payee.updatedOn = entity.getDate('updated_on');
+        payee.lastCategoryId = entity.getNumber('last_category_id');
+
+        return payee;
+    }
+
     public static createLocation(entity: Entity): Location {
         const location = new Location();
 

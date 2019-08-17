@@ -1,24 +1,27 @@
 <?xml version="1.0"?>
 <ability-cash>
     <export-options>
-        <export-date>2018-05-08T10:23:02.096Z</export-date>
+        <export-date>2019-08-17T21:15:54.468Z</export-date>
     </export-options>
     <classifiers>
         <classifier>
             <singular-name>Category</singular-name>
             <plural-name>Categories</plural-name>
             <single-tree>
-                <category changed-at="1970-01-01T00:00:00.000Z">
-                    <name>Entertainment</name>
-                    <category changed-at="1970-01-01T00:00:00.000Z">
-                        <name>Cinema</name>
+                <category>
+                    <name>Category</name>
+                    <category>
+                        <name>Entertainment</name>
+                        <category>
+                            <name>Cinema</name>
+                        </category>
                     </category>
-                </category>
-                <category changed-at="1970-01-01T00:00:00.000Z">
-                    <name>Food</name>
-                </category>
-                <category changed-at="1970-01-01T00:00:00.000Z">
-                    <name>Transport</name>
+                    <category>
+                        <name>Food</name>
+                    </category>
+                    <category>
+                        <name>Transport</name>
+                    </category>
                 </category>
             </single-tree>
         </classifier>
@@ -26,8 +29,11 @@
             <singular-name>Project</singular-name>
             <plural-name>Projects</plural-name>
             <single-tree>
-                <category changed-at="2018-04-26T05:55:36.688Z">
-                    <name>Travel</name>
+                <category>
+                    <name>Project</name>
+                    <category changed-at="2018-04-26T05:55:36.688Z">
+                        <name>Travel</name>
+                    </category>
                 </category>
             </single-tree>
         </classifier>
@@ -35,11 +41,14 @@
             <singular-name>Location</singular-name>
             <plural-name>Locations</plural-name>
             <single-tree>
-                <category changed-at="2018-04-21T11:58:47.339Z">
-                    <name>Crystal</name>
-                </category>
-                <category changed-at="2018-04-21T11:59:56.068Z">
-                    <name>Family</name>
+                <category>
+                    <name>Location</name>
+                    <category changed-at="2018-04-21T11:58:47.339Z">
+                        <name>Crystal</name>
+                    </category>
+                    <category changed-at="2018-04-21T11:59:56.068Z">
+                        <name>Family</name>
+                    </category>
                 </category>
             </single-tree>
         </classifier>
@@ -57,16 +66,98 @@
         </currency>
     </currencies>
     <accounts>
-        <account>
+        <account changed-at="2018-05-03T05:01:01.175Z">
             <name>Cash (RUR)</name>
             <init-balance>0</init-balance>
             <currency>RUR</currency>
             <comment>cash account comment</comment>
         </account>
-        <account>
+        <account changed-at="2018-04-21T11:57:00.195Z">
             <name>Cash (EUR)</name>
             <init-balance>0</init-balance>
             <currency>EUR</currency>
         </account>
     </accounts>
+    <transactions>
+        <transaction>
+            <date>2018-04-21T11:56:34.558Z</date>
+            <income>
+                <income-amount>2577.5</income-amount>
+                <income-account>
+                    <name>Cash (RUR)</name>
+                    <currency>RUR</currency>
+                </income-account>
+                <executed/>
+            </income>
+            <comment>Начальный баланс (Cash (RUR))</comment>
+        </transaction>
+        <transaction>
+            <date>2018-04-21T11:57:00.219Z</date>
+            <income>
+                <income-amount>255.8</income-amount>
+                <income-account>
+                    <name>Cash (EUR)</name>
+                    <currency>EUR</currency>
+                </income-account>
+                <executed/>
+            </income>
+            <comment>Начальный баланс (Cash (EUR))</comment>
+        </transaction>
+        <transaction>
+            <date>2018-04-21T11:57:07.187Z</date>
+            <expense>
+                <expense-amount>-100</expense-amount>
+                <expense-account>
+                    <name>Cash (RUR)</name>
+                    <currency>RUR</currency>
+                </expense-account>
+                <category classifier="Category">
+                    <name>Category</name>
+                    <category>
+                        <name>Entertainment</name>
+                        <category>
+                            <name>Cinema</name>
+                        </category>
+                    </category>
+                </category>
+                <executed/>
+            </expense>
+            <comment>2 tickets</comment>
+        </transaction>
+        <transaction>
+            <date>2018-04-21T11:59:20.801Z</date>
+            <expense>
+                <expense-amount>-50</expense-amount>
+                <expense-account>
+                    <name>Cash (RUR)</name>
+                    <currency>RUR</currency>
+                </expense-account>
+                <category classifier="Category">
+                    <name>Category</name>
+                    <category>
+                        <name>Food</name>
+                    </category>
+                </category>
+                <executed/>
+            </expense>
+            <comment>apples</comment>
+        </transaction>
+        <transaction>
+            <date>2018-04-26T05:55:44.890Z</date>
+            <expense>
+                <expense-amount>-200</expense-amount>
+                <expense-account>
+                    <name>Cash (RUR)</name>
+                    <currency>RUR</currency>
+                </expense-account>
+                <category classifier="Category">
+                    <name>Category</name>
+                    <category>
+                        <name>Transport</name>
+                    </category>
+                </category>
+                <executed/>
+            </expense>
+        </transaction>
+    </transactions>
 </ability-cash>
