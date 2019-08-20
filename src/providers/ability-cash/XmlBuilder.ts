@@ -1,6 +1,8 @@
 import * as builder from 'xmlbuilder';
 import { XMLElement } from 'xmlbuilder';
+import * as moment from 'moment';
 import { Category } from '../../models/Category';
+import { Currency } from '../../models/Currency';
 import { FinancistoDatabase } from '../../models/FinancistoDatabase';
 import { Classifiers } from '../../models/Classifiers';
 import { Location } from '../../models/Location';
@@ -68,6 +70,7 @@ export class XmlBuilder {
         this.addProjects(classifiers);
         this.addLocations(classifiers);
         this.addTransactions(root);
+        this.addCurrencyExchangeRates(root);
 
         return root.end({
             pretty: true,
@@ -81,29 +84,32 @@ export class XmlBuilder {
             const list = root.ele('transactions');
 
             for (const transaction of transactions) {
-                const item = list.ele('transaction');
+                // skip children transactions
+                if (!transaction.parentId) {
+                    const item = list.ele('transaction');
 
-                item.ele('date', transaction.datetime.toISOString());
+                    item.ele('date', transaction.datetime.toISOString());
 
-                if (transaction.isTransfer) {
-                    const transfer = item.ele('transfer');
+                    if (transaction.isTransfer) {
+                        const transfer = item.ele('transfer');
 
-                    this.fillTransfer(transfer, transaction);
-                } else {
-                    addChangedAtAttribute(item, transaction.updatedOn);
-
-                    let incomeOrExpense: XMLElement;
-                    if (transaction.fromAmount > 0) {
-                        incomeOrExpense = item.ele('income');
+                        this.fillTransfer(transfer, transaction);
                     } else {
-                        incomeOrExpense = item.ele('expense');
+                        addChangedAtAttribute(item, transaction.updatedOn);
+
+                        let incomeOrExpense: XMLElement;
+                        if (transaction.fromAmount > 0) {
+                            incomeOrExpense = item.ele('income');
+                        } else {
+                            incomeOrExpense = item.ele('expense');
+                        }
+
+                        this.fillIncomeOrExpense(transaction, incomeOrExpense);
                     }
 
-                    this.fillIncomeOrExpense(transaction, incomeOrExpense);
-                }
-
-                if (transaction.note) {
-                    item.ele('comment', transaction.note);
+                    if (transaction.note) {
+                        item.ele('comment', transaction.note);
+                    }
                 }
             }
         }
@@ -290,6 +296,35 @@ export class XmlBuilder {
 
             if (item.children.length) {
                 this.walk(item.children, category);
+            }
+        }
+    }
+
+    private addCurrencyExchangeRates(root: XMLElement): void {
+        const ratesRoot = root.ele('rates');
+        const rates = this.db.getCurrencyExchangeRates();
+        const uniquePairs: string[] = [];
+
+        for (const rate of rates) {
+            const fromCurrency: Currency = this.db.getCurrency(rate.fromCurrencyId);
+            const from: string = prepareCurrencyCode(fromCurrency.name);
+            const toCurrency: Currency = this.db.getCurrency(rate.toCurrencyId);
+            const to: string = prepareCurrencyCode(toCurrency.name);
+            const date = moment(rate.rateDate).format('YYYY-MM-DD');
+
+            const pair = [from, to];
+            pair.sort();
+            const key: string = `${pair.join('_')}_${date}`;
+
+            if (uniquePairs.indexOf(key) === - 1) {
+                const rateElement = ratesRoot.ele('rate');
+                rateElement.ele('date', date);
+                rateElement.ele('currency-1', from);
+                rateElement.ele('currency-2', to);
+                rateElement.ele('amount-1', rate.rate > 1 ? (1 / rate.rate).toPrecision(5) : 1);
+                rateElement.ele('amount-2', rate.rate > 1 ? 1 : rate.rate);
+
+                uniquePairs.push(key);
             }
         }
     }
