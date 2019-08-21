@@ -317,12 +317,14 @@ export class XmlBuilder {
             const key: string = `${pair.join('_')}_${date}`;
 
             if (uniquePairs.indexOf(key) === - 1) {
+                const fromAmount = rate.rate > 1 ? (1 / rate.rate).toPrecision(5) : 1;
+                const toAmount = rate.rate > 1 ? 1 : rate.rate;
                 const rateElement = ratesRoot.ele('rate');
                 rateElement.ele('date', date);
                 rateElement.ele('currency-1', from);
                 rateElement.ele('currency-2', to);
-                rateElement.ele('amount-1', rate.rate > 1 ? (1 / rate.rate).toPrecision(5) : 1);
-                rateElement.ele('amount-2', rate.rate > 1 ? 1 : rate.rate);
+                rateElement.ele('amount-1', fromAmount);
+                rateElement.ele('amount-2', toAmount);
 
                 uniquePairs.push(key);
             }

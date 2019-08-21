@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <ability-cash>
     <export-options>
-        <export-date>2019-08-17T21:15:54.468Z</export-date>
+        <export-date>2019-08-21T18:44:26.182Z</export-date>
     </export-options>
     <classifiers>
         <classifier>
@@ -160,4 +160,13 @@
             </expense>
         </transaction>
     </transactions>
+    <rates>
+        <rate>
+            <date>2018-04-20</date>
+            <currency-1>RUR</currency-1>
+            <currency-2>EUR</currency-2>
+            <amount-1>0.014286</amount-1>
+            <amount-2>1</amount-2>
+        </rate>
+    </rates>
 </ability-cash>
