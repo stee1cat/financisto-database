@@ -1,16 +1,18 @@
 import * as path from 'path';
 import * as parseArgs from 'minimist';
+import { Commands } from './models/Commands';
 import { ICommandLineArguments } from './models/ICommandLineArguments';
 import { IParsedArgs } from './models/IParsedArgs';
 
 export class CLI {
     protected args: string[];
+    protected readonly COMMAND_INDEX = 2;
 
     constructor() {
         this.args = process.argv;
     }
 
-    public getArguments(): ICommandLineArguments {
+    public validateAndGetArguments(): [string, ICommandLineArguments] {
         const options = {
             string: [
                 'input',
@@ -19,20 +21,38 @@ export class CLI {
         };
         const args: IParsedArgs = parseArgs(this.args, options);
 
-        return this.prepareArguments(args);
+        if (!this.validateArgs(args)) {
+            this.printHelp();
+
+            process.exit(-1);
+        }
+
+        return [args._[this.COMMAND_INDEX] || Commands.Unknown, this.prepareArguments(args)];
+    }
+
+    public printHelp(): void {
+        console.log('help');
+    }
+
+    protected validateArgs(args: IParsedArgs): boolean {
+        const command: string = args._[this.COMMAND_INDEX];
+
+        switch (command) {
+            case Commands.Convert:
+                return args.input && args.output;
+            case Commands.Diff:
+                break;
+        }
+
+        return true;
     }
 
     protected prepareArguments(args: IParsedArgs): ICommandLineArguments {
         const result: ICommandLineArguments = {
             input: '',
             output: '',
-            error: false,
         };
         const executionPath = process.cwd();
-
-        if (!args.input || !args.output) {
-            result.error = true;
-        }
 
         if (args.output) {
             result.output = path.resolve(executionPath, args.output);
