@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  financisto:
+    build: ./
+    container_name: financisto_node
+    volumes:
+    - .:/app
