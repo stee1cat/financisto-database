@@ -12,17 +12,17 @@ function removeExportDate(xml: string): string {
 
 describe('AbilityCashProvider', function () {
     it('parse', function () {
-        let fd: FinancistoDatabase = AbilityCashProvider.parse('');
+        const fd: FinancistoDatabase = AbilityCashProvider.parse('');
 
         expect(fd).to.be.instanceof(FinancistoDatabase);
     });
 
     it('generate', async function () {
-        let fSource = extract(await readFile(`${__dirname}/../data/20180503_100107_997.backup`));
-        let fd: FinancistoDatabase = FinancistoProvider.parse(fSource);
+        const fSource = extract(await readFile(`${__dirname}/../data/20180503_100107_997.backup`));
+        const fd: FinancistoDatabase = FinancistoProvider.parse(fSource);
 
-        let aSource = await readFile(`${__dirname}/../data/20180503_100107_997.xml`);
-        let xml = AbilityCashProvider.generate(fd);
+        const aSource = await readFile(`${__dirname}/../data/20180503_100107_997.xml`);
+        const xml = AbilityCashProvider.generate(fd);
 
         expect(removeExportDate(xml)).to.be.equal(removeExportDate(aSource.toString()));
     });

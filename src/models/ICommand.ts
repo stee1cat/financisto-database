@@ -1,5 +1,3 @@
-import { ICommandLineArguments } from './ICommandLineArguments';
-
 export interface ICommand {
-    execute(args: ICommandLineArguments): Promise<number>;
+    execute(...args: any): Promise<number>;
 }

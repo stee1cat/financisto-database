@@ -1,30 +1,24 @@
 #!/usr/bin/env node
 
-import { CLI } from './CLI';
+import { program } from 'commander';
 import { ConvertCommand } from './commands/ConvertCommand';
 import { DiffCommand } from './commands/DiffCommand';
-import { Commands } from './models/Commands';
 
-const cli = new CLI();
-const [command, args] = cli.validateAndGetArguments();
+const packageInfo = require('../package.json');
 
-async function run() {
-    let exitCode;
-
-    switch (command) {
-        case Commands.Convert:
-            exitCode = await new ConvertCommand().execute(args);
-
-            break;
-        case Commands.Diff:
-            exitCode = await new DiffCommand().execute(args);
-
-            break;
-        default:
-            cli.printHelp();
-    }
-
-    process.exit(exitCode);
-}
-
-run();
+program.version(packageInfo.version)
+    .addCommand(
+        program.createCommand()
+            .command('convert <source> <destination>')
+            .action(async (source: string, destination: string) => {
+                await new ConvertCommand().execute(source, destination);
+            }),
+    )
+    .addCommand(
+        program.createCommand()
+            .command('diff')
+            .action(async () => {
+                await new DiffCommand().execute();
+            }),
+    )
+    .parse(process.argv);

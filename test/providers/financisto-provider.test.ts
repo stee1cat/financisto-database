@@ -6,12 +6,12 @@ import { FinancistoDatabase } from '../../src/models/FinancistoDatabase';
 import { readFile, extract } from '../../src/util';
 
 describe('FinancistoProvider', function () {
-    let filename = `${__dirname}/../data/20180503_100107_997.backup`;
+    const filename = `${__dirname}/../data/20180503_100107_997.backup`;
 
     it('parse', async function () {
-        let file = await readFile(filename);
-        let data = extract(file);
-        let fd: FinancistoDatabase = FinancistoProvider.parse(data);
+        const file = await readFile(filename);
+        const data = extract(file);
+        const fd: FinancistoDatabase = FinancistoProvider.parse(data);
 
         expect(fd).to.be.an.instanceof(FinancistoDatabase);
         expect(fd.getLocations(), 'locations count').to.be.an('array').lengthOf(2);

@@ -1,3 +1,3 @@
 @echo off
 
-docker-compose run --rm financisto %*
+docker-compose run --rm node %*
