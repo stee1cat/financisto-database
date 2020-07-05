@@ -1,3 +1,6 @@
+import { EntityTypes } from '../EntityTypes';
+import { toFinancistoEntityString } from '../../../util';
+
 export class Project {
     public get id(): number {
         return this._id;
@@ -35,4 +38,13 @@ export class Project {
     private _title: string;
     private _isActive: boolean;
     private _updatedOn: Date;
+
+    public toString(): string {
+        return toFinancistoEntityString(EntityTypes.Project, [
+            ['_id', this.id],
+            ['title', this.title],
+            ['is_active', this.isActive],
+            ['updated_on', this.updatedOn],
+        ]);
+    }
 }

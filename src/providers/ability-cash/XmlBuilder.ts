@@ -1,14 +1,14 @@
 import * as builder from 'xmlbuilder';
 import { XMLElement } from 'xmlbuilder';
 import * as moment from 'moment';
-import { Category } from '../../models/Category';
-import { Currency } from '../../models/Currency';
-import { FinancistoDatabase } from '../../models/FinancistoDatabase';
-import { Classifiers } from '../../models/Classifiers';
-import { Location } from '../../models/Location';
-import { Project } from '../../models/Project';
-import { Payee } from '../../models/Payee';
-import { Transaction } from '../../models/Transaction';
+import { Category } from '../financisto/entities/Category';
+import { Currency } from '../financisto/entities/Currency';
+import { FinancistoDatabase } from '../financisto/FinancistoDatabase';
+import { Classifiers } from './Classifiers';
+import { Location } from '../financisto/entities/Location';
+import { Project } from '../financisto/entities/Project';
+import { Payee } from '../financisto/entities/Payee';
+import { Transaction } from '../financisto/entities/Transaction';
 
 interface IClassifierNames {
     singular: Classifiers;
@@ -21,7 +21,7 @@ function addChangedAtAttribute(element: XMLElement, date: Date): void {
     }
 }
 
-export function prepareCurrencyCode(code: string): string {
+export function prepareCurrencyCode(code: string = ''): string {
     let result = '';
 
     switch (code.toLowerCase()) {
@@ -47,8 +47,6 @@ function createOneLevelClassifier(classifiers: XMLElement, items: Location[] | P
     root.ele('name', names.singular);
     for (const item of items) {
         const node = root.ele('category');
-
-        addChangedAtAttribute(node, item.updatedOn);
         node.ele('name', item.title);
     }
 }
@@ -95,8 +93,6 @@ export class XmlBuilder {
 
                         this.fillTransfer(transfer, transaction);
                     } else {
-                        addChangedAtAttribute(item, transaction.updatedOn);
-
                         let incomeOrExpense: XMLElement;
                         if (transaction.fromAmount > 0) {
                             incomeOrExpense = item.ele('income');
@@ -116,8 +112,6 @@ export class XmlBuilder {
     }
 
     private fillIncomeOrExpense(transaction: Transaction, incomeOrExpense: XMLElement) {
-        addChangedAtAttribute(incomeOrExpense, transaction.updatedOn);
-
         incomeOrExpense.ele(`${incomeOrExpense.name}-amount`, transaction.fromAmount / 100);
 
         if (transaction.fromAccountId) {
@@ -198,7 +192,6 @@ export class XmlBuilder {
                 const account = section.ele('account');
                 const currency = this.db.getCurrency(a.currencyId);
 
-                addChangedAtAttribute(account, a.updatedOn);
                 account.ele('name', a.title);
                 account.ele('init-balance', 0);
 
@@ -290,8 +283,6 @@ export class XmlBuilder {
     private walk(list: Category[], parent: XMLElement): void {
         for (const item of list) {
             const category = parent.ele('category');
-
-            addChangedAtAttribute(category, item.updatedOn);
             category.ele('name', item.title);
 
             if (item.children.length) {

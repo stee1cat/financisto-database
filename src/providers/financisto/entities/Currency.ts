@@ -1,3 +1,6 @@
+import { EntityTypes } from '../EntityTypes';
+import { toFinancistoEntityString } from '../../../util';
+
 export class Currency {
     public get id(): number {
         return this._id;
@@ -79,6 +82,14 @@ export class Currency {
         this._updatedOn = value;
     }
 
+    public get isActive(): boolean {
+        return this._isActive;
+    }
+
+    public set isActive(value: boolean) {
+        this._isActive = value;
+    }
+
     private _id: number;
     private _name: string;
     private _title: string;
@@ -89,4 +100,21 @@ export class Currency {
     private _groupSeparator: string;
     private _symbolFormat: string;
     private _updatedOn: Date;
+    private _isActive: boolean;
+
+    public toString(): string {
+        return toFinancistoEntityString(EntityTypes.Currency, [
+            ['_id', this.id],
+            ['name', this.name],
+            ['title', this.title],
+            ['symbol', this.symbol],
+            ['is_default', this.isDefault],
+            ['decimals', this.decimals],
+            ['decimal_separator', this.decimalSeparator],
+            ['group_separator', this.groupSeparator],
+            ['symbol_format', this.symbolFormat],
+            ['updated_on', this.updatedOn],
+            ['is_active', this.isActive],
+        ]);
+    }
 }

@@ -1,3 +1,7 @@
+import { EntityTypes } from '../EntityTypes';
+import { toFinancistoEntityString } from '../../../util';
+import { LocationProvider } from './LocationProvider';
+
 export class Location {
     public get id(): number {
         return this._id;
@@ -21,6 +25,14 @@ export class Location {
 
     public set datetime(value: number) {
         this._datetime = value;
+    }
+
+    public get provider(): LocationProvider {
+        return this._provider;
+    }
+
+    public set provider(value: LocationProvider) {
+        this._provider = value;
     }
 
     public get accuracy(): number {
@@ -55,6 +67,14 @@ export class Location {
         this._isPayee = value;
     }
 
+    public get resolvedAddress(): string {
+        return this._resolvedAddress;
+    }
+
+    public set resolvedAddress(value: string) {
+        this._resolvedAddress = value;
+    }
+
     public get count(): number {
         return this._count;
     }
@@ -79,14 +99,43 @@ export class Location {
         this._title = value;
     }
 
+    public get isActive(): boolean {
+        return this._isActive;
+    }
+
+    public set isActive(value: boolean) {
+        this._isActive = value;
+    }
+
     private _id: number;
     private _name: string;
     private _datetime: number;
+    private _provider: LocationProvider;
     private _accuracy: number;
     private _latitude: number;
     private _longitude: number;
     private _isPayee: boolean;
+    private _resolvedAddress: string;
     private _count: number;
     private _updatedOn: Date;
     private _title: string;
+    private _isActive: boolean;
+
+    public toString(): string {
+        return toFinancistoEntityString(EntityTypes.Location, [
+            ['_id', this.id],
+            ['name', this.name],
+            ['datetime', this.datetime],
+            ['provider', this.provider],
+            ['accuracy', this.accuracy],
+            ['latitude', this.latitude],
+            ['longitude', this.longitude],
+            ['is_payee', this.isPayee],
+            ['resolved_address', this.resolvedAddress],
+            ['count', this.count],
+            ['updated_on', this.updatedOn],
+            ['title', this.title],
+            ['is_active', this.isActive],
+        ]);
+    }
 }

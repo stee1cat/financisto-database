@@ -1,27 +1,8 @@
-export class Transaction {
-    private _id: number;
-    private _fromAccountId: number;
-    private _toAccountId: number;
-    private _categoryId: number;
-    private _projectId: number;
-    private _locationId: number;
-    private _note: string;
-    private _fromAmount: number;
-    private _toAmount: number;
-    private _datetime: Date;
-    private _accuracy: number;
-    private _latitude: number;
-    private _longitude: number;
-    private _isTemplate: boolean;
-    private _status: string;
-    private _isCcardPayment: boolean;
-    private _lastRecurrence: Date;
-    private _payeeId: number;
-    private _parentId: number;
-    private _updatedOn: Date;
-    private _originalCurrencyId: number;
-    private _originalFromAmount: number;
+import { EntityTypes } from '../EntityTypes';
+import { toFinancistoEntityString } from '../../../util';
+import { LocationProvider } from './LocationProvider';
 
+export class Transaction {
     public get id(): number {
         return this._id;
     }
@@ -102,6 +83,14 @@ export class Transaction {
         return `${d.getFullYear()}-${month}-${date}`;
     }
 
+    public get provider(): LocationProvider {
+        return this._provider;
+    }
+
+    public set provider(value: LocationProvider) {
+        this._provider = value;
+    }
+
     public get datetime(): Date {
         return this._datetime;
     }
@@ -138,12 +127,28 @@ export class Transaction {
         return this.fromAccountId !== 0 && this.toAccountId !== 0;
     }
 
-    public get isTemplate(): boolean {
+    public get isTemplate(): number {
         return this._isTemplate;
     }
 
-    public set isTemplate(value: boolean) {
+    public set isTemplate(value: number) {
         this._isTemplate = value;
+    }
+
+    public get recurrence(): string {
+        return this._recurrence;
+    }
+
+    public set recurrence(value: string) {
+        this._recurrence = value;
+    }
+
+    public get templateName(): string {
+        return this._templateName;
+    }
+
+    public set templateName(value: string) {
+        this._templateName = value;
     }
 
     public get status(): string {
@@ -152,6 +157,14 @@ export class Transaction {
 
     public set status(value: string) {
         this._status = value;
+    }
+
+    public get attachedPicture(): string {
+        return this._attachedPicture;
+    }
+
+    public set attachedPicture(value: string) {
+        this._attachedPicture = value;
     }
 
     public get isCcardPayment(): boolean {
@@ -208,5 +221,63 @@ export class Transaction {
 
     public set originalFromAmount(value: number) {
         this._originalFromAmount = value;
+    }
+
+    private _id: number;
+    private _fromAccountId: number;
+    private _toAccountId: number;
+    private _categoryId: number;
+    private _projectId: number;
+    private _locationId: number;
+    private _note: string;
+    private _fromAmount: number;
+    private _toAmount: number;
+    private _datetime: Date;
+    private _provider: LocationProvider;
+    private _accuracy: number;
+    private _latitude: number;
+    private _longitude: number;
+    private _isTemplate: number;
+    private _recurrence: string;
+    private _templateName: string;
+    private _status: string;
+    private _attachedPicture: string;
+    private _isCcardPayment: boolean;
+    private _lastRecurrence: Date;
+    private _payeeId: number;
+    private _parentId: number;
+    private _updatedOn: Date;
+    private _originalCurrencyId: number;
+    private _originalFromAmount: number;
+
+    public toString(): string {
+        return toFinancistoEntityString(EntityTypes.Transaction, [
+            ['_id', this.id],
+            ['from_account_id', this.fromAccountId],
+            ['to_account_id', this.toAccountId],
+            ['category_id', this.categoryId],
+            ['project_id', this.projectId],
+            ['location_id', this.locationId],
+            ['note', this.note ? this.note : undefined],
+            ['from_amount', this.fromAmount],
+            ['to_amount', this.toAmount],
+            ['datetime', this.datetime],
+            ['provider', this.provider],
+            ['accuracy', this.accuracy],
+            ['latitude', this.latitude],
+            ['longitude', this.longitude],
+            ['is_template', this.isTemplate],
+            ['recurrence', this.recurrence],
+            ['template_name', this.templateName],
+            ['status', this.status],
+            ['attached_picture', this.attachedPicture],
+            ['is_ccard_payment', this.isCcardPayment],
+            ['last_recurrence', this.lastRecurrence],
+            ['payee_id', this.payeeId],
+            ['parent_id', this.parentId],
+            ['updated_on', this.updatedOn],
+            ['original_currency_id', this.originalCurrencyId],
+            ['original_from_amount', this.originalFromAmount],
+        ]);
     }
 }

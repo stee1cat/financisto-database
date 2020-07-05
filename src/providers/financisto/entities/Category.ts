@@ -1,4 +1,6 @@
-import { INode } from './INode';
+import { EntityTypes } from '../EntityTypes';
+import { toFinancistoEntityString } from '../../../util';
+import { INode } from '../../../models/INode';
 
 export class Category implements INode {
     public get id(): number {
@@ -89,6 +91,14 @@ export class Category implements INode {
         this._parentId = value;
     }
 
+    public get isActive(): boolean {
+        return this._isActive;
+    }
+
+    public set isActive(value: boolean) {
+        this._isActive = value;
+    }
+
     private _id: number;
     private _title: string;
     private _left: number;
@@ -100,4 +110,20 @@ export class Category implements INode {
     private _updatedOn: Date;
     private _children: Category[] = [];
     private _parentId: number;
+    private _isActive: boolean;
+
+    public toString(): string {
+        return toFinancistoEntityString(EntityTypes.Category, [
+            ['_id', this.id],
+            ['title', this.title],
+            ['left', this.left],
+            ['right', this.right],
+            ['last_location_id', this.lastLocationId],
+            ['last_project_id', this.lastProjectId],
+            ['sort_order', this.sortOrder],
+            ['type', this.type],
+            ['updated_on', this.updatedOn],
+            ['is_active', this.isActive],
+        ]);
+    }
 }

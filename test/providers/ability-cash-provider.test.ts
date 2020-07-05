@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import 'mocha';
 
-import { FinancistoDatabase } from '../../src/models/FinancistoDatabase';
+import { FinancistoDatabase } from '../../src/providers/financisto/FinancistoDatabase';
 import { AbilityCashProvider } from '../../src/providers/ability-cash/AbilityCashProvider';
 import { FinancistoProvider } from '../../src/providers/financisto/FinancistoProvider';
 import { extract, readFile } from '../../src/util';

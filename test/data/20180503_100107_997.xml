@@ -22,6 +22,21 @@
                     <category>
                         <name>Transport</name>
                     </category>
+                    <category>
+                        <name>Mobile</name>
+                    </category>
+                </category>
+            </single-tree>
+        </classifier>
+        <classifier>
+            <singular-name>Payee</singular-name>
+            <plural-name>Payees</plural-name>
+            <single-tree>
+                <category>
+                    <name>Payee</name>
+                    <category>
+                        <name>Uber</name>
+                    </category>
                 </category>
             </single-tree>
         </classifier>
@@ -31,7 +46,7 @@
             <single-tree>
                 <category>
                     <name>Project</name>
-                    <category changed-at="2018-04-26T05:55:36.688Z">
+                    <category>
                         <name>Travel</name>
                     </category>
                 </category>
@@ -43,11 +58,11 @@
             <single-tree>
                 <category>
                     <name>Location</name>
-                    <category changed-at="2018-04-21T11:58:47.339Z">
+                    <category>
                         <name>Crystal</name>
                     </category>
-                    <category changed-at="2018-04-21T11:59:56.068Z">
-                        <name>Family</name>
+                    <category>
+                        <name>Walmart</name>
                     </category>
                 </category>
             </single-tree>
@@ -66,13 +81,13 @@
         </currency>
     </currencies>
     <accounts>
-        <account changed-at="2018-05-03T05:01:01.175Z">
+        <account>
             <name>Cash (RUR)</name>
             <init-balance>0</init-balance>
             <currency>RUR</currency>
             <comment>cash account comment</comment>
         </account>
-        <account changed-at="2018-04-21T11:57:00.195Z">
+        <account>
             <name>Cash (EUR)</name>
             <init-balance>0</init-balance>
             <currency>EUR</currency>
@@ -154,6 +169,29 @@
                     <name>Category</name>
                     <category>
                         <name>Transport</name>
+                    </category>
+                </category>
+                <category classifier="Payee">
+                    <name>Payee</name>
+                    <category>
+                        <name>Uber</name>
+                    </category>
+                </category>
+                <executed/>
+            </expense>
+        </transaction>
+        <transaction>
+            <date>2020-07-05T12:18:45.098Z</date>
+            <expense>
+                <expense-amount>-100</expense-amount>
+                <expense-account>
+                    <name>Cash (RUR)</name>
+                    <currency>RUR</currency>
+                </expense-account>
+                <category classifier="Category">
+                    <name>Category</name>
+                    <category>
+                        <name>Mobile</name>
                     </category>
                 </category>
                 <executed/>

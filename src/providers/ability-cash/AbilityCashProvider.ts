@@ -1,4 +1,4 @@
-import { FinancistoDatabase } from '../../models/FinancistoDatabase';
+import { FinancistoDatabase } from '../financisto/FinancistoDatabase';
 import { XmlBuilder } from './XmlBuilder';
 
 export class AbilityCashProvider {

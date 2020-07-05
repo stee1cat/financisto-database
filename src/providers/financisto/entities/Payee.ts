@@ -1,3 +1,6 @@
+import { toFinancistoEntityString } from '../../../util';
+import { EntityTypes } from '../EntityTypes';
+
 export class Payee {
     public get updatedOn(): Date {
         return this._updatedOn;
@@ -28,8 +31,27 @@ export class Payee {
         this._id = value;
     }
 
+    public get isActive(): boolean {
+        return this._isActive;
+    }
+
+    public set isActive(value: boolean) {
+        this._isActive = value;
+    }
+
     private _id: number;
     private _title: string;
     private _lastCategoryId: number;
     private _updatedOn: Date;
+    private _isActive: boolean;
+
+    public toString(): string {
+        return toFinancistoEntityString(EntityTypes.Payee, [
+            ['_id', this.id],
+            ['title', this.title],
+            ['last_category_id', this.lastCategoryId],
+            ['updated_on', this.updatedOn],
+            ['is_active', this.isActive],
+        ]);
+    }
 }

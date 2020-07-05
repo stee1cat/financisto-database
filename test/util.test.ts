@@ -10,7 +10,7 @@ describe('util', function () {
     it('readFile', async function () {
         const file = await readFile(filename);
 
-        expect(file.byteLength).to.be.equal(1036);
+        expect(file.byteLength).to.be.equal(1250);
     });
 
     it('extract', async function () {

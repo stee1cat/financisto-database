@@ -1,3 +1,6 @@
+import { EntityTypes } from '../EntityTypes';
+import { toFinancistoEntityString } from '../../../util';
+
 export class CurrencyExchangeRate {
     public get fromCurrencyId(): number {
         return this._fromCurrencyId;
@@ -44,4 +47,14 @@ export class CurrencyExchangeRate {
     private _rateDate: Date;
     private _rate: number;
     private _updatedOn: Date;
+
+    public toString(): string {
+        return toFinancistoEntityString(EntityTypes.CurrencyExchangeRate, [
+            ['from_currency_id', this.fromCurrencyId],
+            ['to_currency_id', this.toCurrencyId],
+            ['rate_date', this.rateDate],
+            ['rate', this.rate],
+            ['updated_on', this.updatedOn],
+        ]);
+    }
 }
